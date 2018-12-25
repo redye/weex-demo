@@ -1,0 +1,15 @@
+# ios
+platforms/ios/build/
+platforms/ios/bundlejs/
+platforms/ios/Pods/
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+
+# weex
+node_modules/
+.temp/
+dist/
+.DS_Store
+package-lock.json
