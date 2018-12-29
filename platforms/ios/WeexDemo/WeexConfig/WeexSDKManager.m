@@ -21,8 +21,8 @@
 + (void)setup;
 {
 #if DEBUG
-//    [WXDevTool setDebug:YES];
-//    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.62:8088/debugProxy/native"];
+    [WXDevTool setDebug:NO];
+    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.56:8099/debugProxy/native/5"];
 #endif
     
     NSURL *url = nil;

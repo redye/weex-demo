@@ -10,23 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
-            timestampString = "567310011.509516"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "-notificationRefreshInstance:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
-            timestampString = "567310011.528816"
+            timestampString = "567569160.279264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
@@ -51,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/SocketRocket/SocketRocket/SRWebSocket.m"
-            timestampString = "566981185.005504"
+            filePath = "Pods/WXDevtool/sdk/WXDevTool/Source/PonyDebugger/WXDebugger.m"
+            timestampString = "567503202.407045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
-            landmarkName = "-_HTTPHeadersDidFinish"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-webSocket:didCloseWithCode:reason:wasClean:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,12 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pods/WXDevtool/sdk/WXDevTool/Source/PonyDebugger/WXDebugger.m"
-            timestampString = "566981203.900063"
+            timestampString = "567503202.407096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-webSocketDidOpen:"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "-webSocket:didFailWithError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -84,12 +68,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pods/WXDevtool/sdk/WXDevTool/Source/PonyDebugger/WXDebugDomainController.m"
-            timestampString = "567310011.531352"
+            timestampString = "567569160.282552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-registerDevice"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+defaultInstance"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.283294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "-render"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -99,13 +99,172 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/WXDevtool/sdk/WXDevTool/Source/PonyDebugger/WXDebugDomainController.m"
-            timestampString = "567310011.533609"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.2834049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "-_registerDeviceWithParams:"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "-render"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.286932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-render"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.287042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "-render"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.287932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-render"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/WeexSDK/ios/sdk/WeexSDK/Sources/Model/WXSDKInstance.m"
+            timestampString = "567510622.091213"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-renderView:options:data:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXComponentManager.mm"
+            timestampString = "567512632.520071"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "866"
+            endingLineNumber = "866"
+            landmarkName = "-refreshFinish"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WXComponentManager refreshFinish]"
+                  moduleName = "WeexDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/weimob/Documents/weex/Demo/platforms/ios/Pods/WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXComponentManager.mm"
+                  timestampString = "567512481.125441"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "866"
+                  endingLineNumber = "866"
+                  offsetFromSymbolStart = "683">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[WXComponentManager refreshFinish]_block_invoke"
+                  moduleName = "WeexDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/weimob/Documents/weex/Demo/platforms/ios/Pods/WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXComponentManager.mm"
+                  timestampString = "567512481.128664"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "866"
+                  endingLineNumber = "866"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.518"
+                  moduleName = "WeexDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/weimob/Documents/weex/Demo/platforms/ios/Pods/WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXComponentManager.mm"
+                  timestampString = "567512481.133859"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "866"
+                  endingLineNumber = "866"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/WXDevtool/sdk/WXDevTool/Source/PonyDebugger/WXDebugger.m"
+            timestampString = "567511294.302573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-webSocket:didReceiveMessage:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeexDemo/WeexScanner/WXDemoViewController.m"
+            timestampString = "567569160.288228"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

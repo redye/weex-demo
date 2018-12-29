@@ -53,15 +53,7 @@
 	<key>WXEntryBundleURL</key>
 	<string>bundlejs/index.js</string>
 	<key>WXSocketConnectionURL</key>
-	<string>ws://172.19.40.62:8083</string>
-  <key>WXEntryBundleURL</key>
-  <string>bundlejs/index.js</string>
-  <key>WXSocketConnectionURL</key>
-  <string>ws://172.19.40.62:8083</string>
-  <key>WXEntryBundleURL</key>
-  <string>bundlejs/index.js</string>
-  <key>WXSocketConnectionURL</key>
-  <string>ws://172.19.40.62:8084</string>
+	<string>ws://172.19.40.62:8081</string>
   <key>WXEntryBundleURL</key>
   <string>bundlejs/index.js</string>
   <key>WXSocketConnectionURL</key>
@@ -69,10 +61,6 @@
   <key>WXEntryBundleURL</key>
   <string>bundlejs/index.js</string>
   <key>WXSocketConnectionURL</key>
-  <string>ws://172.19.40.62:8081</string>
-  <key>WXEntryBundleURL</key>
-  <string>bundlejs/index.js</string>
-  <key>WXSocketConnectionURL</key>
-  <string>ws://172.19.40.62:8083</string>
+  <string>ws://172.19.40.56:8081</string>
 </dict>
 </plist>

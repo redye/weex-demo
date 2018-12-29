@@ -1,19 +1,19 @@
 <template>
-<div class="wrapper">
-  <div class="inner-wrapper">
-    <div class="item" @click="onItemClick(0)">
-      <text class="ic iconfont">&#xe689;</text>
-      <text class="txt">扫一扫</text>
-    </div>
-    <div class="search" @click="onSearch">
-      <text class="search-txt iconfont">&#xe65c; 搜索商品，共8888款好物</text>
-    </div>
-    <div class="item" @click="onItemClick(1)">
-      <text class="ic iconfont">&#xe70a;</text>
-      <text class="txt">消息</text>
+  <div class="wrapper">
+    <div class="inner-wrapper">
+      <div class="item" @click="onItemClick(0)">
+        <text class="ic iconfont">&#xe689;</text>
+        <text class="txt">扫一扫</text>
+      </div>
+      <div class="search" @click="onSearch">
+        <text class="search-txt iconfont">&#xe65c; 搜索商品，共8888款好物</text>
+      </div>
+      <div class="item" @click="onItemClick(1)">
+        <text class="ic iconfont">&#xe70a;</text>
+        <text class="txt">消息</text>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>

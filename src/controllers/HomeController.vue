@@ -2,6 +2,11 @@
   <div class="home-container">
     <nav-bar @item-click="onItemClick" @search="onSearch"></nav-bar>
     <channel @click="onClick" :channels="channels"></channel>
+    <text>这是首页</text>
+    <text>这是首页</text>
+    <text>这是首页</text>
+    <text>这是首页</text>
+    <text>这是首页2</text>
   </div>
 </template>
 
@@ -40,6 +45,7 @@ export default {
   methods: {
     onClick: function(event) {
       const data = event.data;
+      console.log(JSON.stringify(data));
     },
     onSearch: function() {
 

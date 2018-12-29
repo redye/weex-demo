@@ -282,7 +282,7 @@
 
 #pragma mark -
 #pragma mark - shark listener
--(BOOL) canBecomeFirstResponder
+- (BOOL) canBecomeFirstResponder
 {
     return YES;
 }
@@ -300,15 +300,15 @@
 #pragma mark -
 #pragma mark - UIResponder support motion
 
--(void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
 }
 
--(void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+- (void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
 }
 
--(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     static BOOL shakeMarker = YES;
     if (motion == UIEventSubtypeMotionShake) {

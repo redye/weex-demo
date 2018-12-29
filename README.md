@@ -21,20 +21,20 @@ Weex有一个[在线编写代码的平台](http://dotwe.org/vue/)，可以先去
 
 node 的安装这里先略过，保证 node 的版本 >= 6
 
-```
+```bash
 node -v 			# 查看 node 的版本
 node --version 		# 查看 node 的版本
 ```
 
 首先是安装 weex-toolkit
 
-```js
+```bash
 npm install -g weex-toolkit
 ```
 
 安装成功后，就可以愉快的去创建你的项目了
 
-```
+```bash
 weex create weex-demo 			# 创建项目
 weex platform add ios			# 添加 iOS 项目模板
 weex run ios					# 运行 iOS 项目
@@ -44,19 +44,19 @@ weex run ios					# 运行 iOS 项目
 
 当然，你也许想要启动 weex 项目，自己修改点东西看看效果，你打开了项目的跟目录，观察了下 package.json 这个文件，项目目录下如果没有 node_modules 这个文件夹，首先需要 
 
-```
+```bash
 npm install 			# 安装依赖包
 ```
 安装完成后，开始启动服务
 
-```
+```bash
 npm run serve			# 启动 serve 服务
 npm run dev			# 自动编译
 ```
 
 可能你在启动服务的时候会遇到一个错误
 
-```
+```bash
 Vue packages version mismatch:
 
 - vue@2.4.4
@@ -76,7 +76,7 @@ If you are using vue-loader@<10.0 or vueify, re-installing vue-loader/vueify sho
 
 但是你并不是一无所获，有一个可能的原因 -- 在这之前你安装了全局的 vue，然后你在终端敲下了
 
-```
+```bash
 vue -v
 ```
 终端回应你了，他输出了 vue 的版本号，嗯，跟你的 package.json 里面并不一样...
@@ -90,7 +90,7 @@ vue -v
 
 全局的 vue 安装在当前用户的目录下
 
-```
+```bash
 cd ~
 ls -a
 ```
