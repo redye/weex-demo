@@ -1,19 +1,43 @@
 <template>
-  <div class="wrapper">
-    <!-- <image :src="logo" class="logo" /> -->
-    <!-- <text class="greeting">The environment is ready!</text>
-    <text>现在开始学习 weex !!!!</text> -->
+  <div class="wrapper">    
+    <nav-bar ref="navBar" :back="true" right-text="消息"></nav-bar>
     <router-view/>
   </div>
 </template>
 
 <script>
+
+import util from '@/util/util';
+
+import NavBar from '@/components/NavBar';
+
+const navigator =  weex.requireModule('navigator');
+
 export default {
   name: 'App',
-  data () {
-    return {
-      logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
+  props: {
+    showNavBar: {
+      type: Boolean,
+      default: true,
     }
+  },
+  components: {
+    NavBar
+  },
+  data: function ()  {
+    return {
+    }
+  },
+  beforeCreate: function() {
+    util.initIconFont();
+  },
+  mounted: function() {
+    const navBar = this.$refs.navBar;
+    weex.app = Object.assign(weex.app || {}, {
+      ui: {
+        navBar: navBar
+      }
+    });
   }
 }
 </script>
@@ -22,20 +46,6 @@ export default {
   .wrapper {
     justify-content: center;
     align-items: center;
-  }
-  .logo {
-    width: 424px;
-    height: 200px;
-  }
-  .greeting {
-    text-align: center;
-    margin-top: 70px;
-    font-size: 50px;
-    color: #41B883;
-  }
-  .message {
-    margin: 30px;
-    font-size: 32px;
-    color: #727272;
+    flex: 1;
   }
 </style>

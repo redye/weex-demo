@@ -57,9 +57,7 @@
 
 const dom = weex.requireModule('dom');
 const animation = weex.requireModule('animation');
-const modal = weex.requireModule('modal');
 
-// , isIpx&&isIpx()?'w-ipx':''
 export default {
   props: {
     channels: {

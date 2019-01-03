@@ -1,6 +1,6 @@
 <template>
-  <div class="home-container">
-    <nav-bar @item-click="onItemClick" @search="onSearch"></nav-bar>
+  <div class="home-container" @page='onAppear'>
+    <search-bar @item-click="onItemClick" @search="onSearch"></search-bar>
     <channel @click="onClick" :channels="channels"></channel>
     <text>这是首页</text>
     <text>这是首页</text>
@@ -20,15 +20,15 @@
 
 <script>
 
-import NavBar from '../components/NavBar';
-import Channel from '../components/Channel';
+import SearchBar from '@/components/SearchBar';
+import Channel from '@/components/Channel';
 
 const modal = weex.requireModule('modal');
-const navigation = weex.requireModule('navigtion');
+const navigator = require('@/util/navigator');
 
 export default {
   components: {
-    NavBar,
+    SearchBar,
     Channel
   },
   data: function() {
@@ -51,10 +51,13 @@ export default {
 
     },
     onItemClick: function (event) {
-      modal.toast({
-        message: `item click => ${event.index}`,
-        duration: 3
+      console.log(`config ==> ${JSON.stringify(this.$getConfig())}`);
+      navigator.push({
+        url: `controllers/WebController.js?url=http://www.baidu.com`
       });
+    }, 
+    onAppear: function () {
+      console.log('home appear')
     }
   }
 }

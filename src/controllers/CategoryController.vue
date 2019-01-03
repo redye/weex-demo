@@ -1,5 +1,5 @@
 <template>
   <div>
-    <text>个人</text>
+    <text>分类</text>
   </div>
 </template>

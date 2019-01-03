@@ -1,16 +1,14 @@
 <template>
-  <div class="wrapper">
+  <div v-if="show" class="wrapper">
     <div class="inner-wrapper">
-      <div class="item" @click="onItemClick(0)">
-        <text class="ic iconfont">&#xe689;</text>
-        <text class="txt">扫一扫</text>
+      <div class="item">
+        <div class="item-inner" @click="onBack"><text class="txt" v-if="back">&#xe68f;</text></div>
       </div>
-      <div class="search" @click="onSearch">
-        <text class="search-txt iconfont">&#xe65c; 搜索商品，共8888款好物</text>
+      <div class="title-wrapper" @click="onSearch">
+        <text class="search-txt iconfont">标题</text>
       </div>
-      <div class="item" @click="onItemClick(1)">
-        <text class="ic iconfont">&#xe70a;</text>
-        <text class="txt">消息</text>
+      <div class="item">
+        <div class="item-inner" @click="onRight"><text class="txt" v-if="rightText">{{rightText}}</text></div>
       </div>
     </div>
   </div>
@@ -18,14 +16,12 @@
 
 <style scoped>
   .wrapper {
-    height: 128px;
+    height: 88px;
     width: 750px;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
-    background-color: #fafafa;
   }
   .inner-wrapper {
-    margin-top: 44px;
     height: 88px;
     flex-direction: row;
   }
@@ -33,53 +29,63 @@
     font-family: iconfont;
   }
   .item {
-    width: 96px;    
-    flex-direction: column;
+    width: 120px;
+    align-items: center;
     justify-content: center;
   }
-  .ic, .txt {
-    text-align: center;
-    color:#666666;
-    font-weight: 300;
-  }
-  .ic {
-    font-size: 32px;
+  .item-inner {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
   }
   .txt {
-    font-size: 18px;
-  }
-  .search-txt {
-    font-size: 26px;
-    color:#666666;
-    font-weight: 300;
+    font-size: 30px;
     text-align: center;
+    color:#666666;
   }
-  .search {
+  .title-wrapper {
     flex: 1;
-    height: 60px;
+    align-items: center;
     justify-content: center;
-    background-color: #ededed;
-    border-radius: 8px;
-    margin-top: 8px;
+  }
+  .title {
+    font-size: 36px;
   }
 </style>
 
 <script>
-export default {
 
+const navigator = require('@/util/navigator');
+
+export default {
+  props: {
+    back: {
+      type: Boolean,
+      default: true
+    },
+    rightText: {
+      type: String,
+    },
+    visible: {
+      type: Boolean,
+      default: true
+    }
+  },
   data: function () {
     return {
+      show: this.visible
     }
   },
   methods: {
-    onSearch: function () {
-      this.$emit('search');
+    onBack: function(event) {
+      navigator.pop();
     },
-    onItemClick: function(index) {
-      this.$emit('itemClick', {
-        index: index
-      })
-    } 
+    onRight: function(event) {
+      this.$emit('right');
+    },
+    setVisible: function(visible) {
+      this.show = visible;
+    }
   }
 }
 </script>

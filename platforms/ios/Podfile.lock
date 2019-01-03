@@ -6,7 +6,7 @@ PODS:
   - WeexPluginLoader (0.0.1.9.1):
     - WeexSDK
   - WeexSDK (0.20.1)
-  - WXDevtool (0.17.1):
+  - WXDevtool (0.20.0):
     - SocketRocket
     - WeexSDK
 
@@ -22,7 +22,7 @@ SPEC CHECKSUMS:
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   WeexPluginLoader: 85c1304f8ba29864e58531614a0acfeceef1b85c
   WeexSDK: ced3f2ef2f0cb48d1d76fd2f03c645572c632d21
-  WXDevtool: 9e3da2c92c83c8f62521c8264d9c2c721512f5c5
+  WXDevtool: 833dd3e835df1f5f278fc8865c865d48196bfdab
 
 PODFILE CHECKSUM: ee3730dc86dad101d52e994b60532b423647806f
 

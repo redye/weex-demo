@@ -1,8 +1,10 @@
 <template>
   <div class="tab-wrapper">
-    <div class="tab-item-wrapper" v-for="(item, index) in tabs" :key="'tab_' + index" @click="onClick(index)">
-      <text class="icon iconfont" :style="{color: item.selected ? themeColor : '#333333'}">&#xe689;</text>
-      <text class="title" :style="{color: item.selected ? themeColor : '#333333'}">{{item.title}}</text>      
+    <div :class="['tab-inner-wrapper', isIpx && isIpx() ? 'tab-inner-wrapper-x' : '']">
+      <div class="tab-item-wrapper" v-for="(item, index) in tabs" :key="'tab_' + index" @click="onClick(index)">
+        <text class="icon iconfont" :style="{color: item.selected ? themeColor : '#333333'}">{{item.icon}}</text>
+        <text class="title" :style="{color: item.selected ? themeColor : '#333333'}">{{item.title}}</text>      
+      </div>
     </div>
   </div>
 </template>
@@ -10,9 +12,18 @@
 <style scoped>
   .tab-wrapper {
     width: 750px;
-    height: 118px;
+    background-color: #fafafa;
+  }
+  .tab-inner-wrapper {
     flex-direction: row;
     align-items: center;
+    margin-top: 10px;
+    border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    padding-bottom: 20px;
+  }
+  .tab-inner-wrapper-x {
+    margin-bottom: 88px;
   }
   .tab-item-wrapper {
     flex: 1;
@@ -24,10 +35,13 @@
   }
   .title {
     font-size: 24px;
-    margin-top: 8;
   }
   .iconfont {
     font-family: iconfont;
+    font-size: 50px;
+  }
+  .tab-icon {
+    /* background-color: orange; */
   }
 </style>
 
@@ -36,29 +50,14 @@
 const modal = weex.requireModule('modal');
 
 export default {
+  props: {
+    tabs: {
+      type: Array,
+      required: true,
+    }
+  },
   data: function() {
     return {
-      tabs: [{
-        title: '首页',
-        icon: '&#xe660;',
-        selected: true
-      }, {
-        title: '专题',
-        icon: '&#xe744;',
-        selected: false
-      }, {
-        title: '分类',
-        icon: '&#xe605;',        
-        selected: false
-      }, {
-        title: '购物车',
-        icon: '&#xe61a;',
-        selected: false
-      }, {
-        title: '个人',
-        icon: '&#xe639;',
-        selected: false
-      }],
       lastIndex: 0
     }
   },

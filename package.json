@@ -21,7 +21,9 @@
     "android": "weex run android",
     "pack:ios": "npm run clean:ios && weex build ios",
     "pack:android": "npm run clean:android && weex build android",
-    "pack:web": "npm run clean:web && npm run build:prod:web"
+    "pack:web": "npm run clean:web && npm run build:prod:web",
+    "compile:clean": "rimraf ./dist",
+    "compile": "npm run compile:clean && weex compile src dist -d source-map"
   },
   "keywords": [
     "weex"
