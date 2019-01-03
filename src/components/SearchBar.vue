@@ -22,7 +22,6 @@
     width: 750px;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
-    background-color: #fafafa;
   }
   .inner-wrapper {
     height: 88px;

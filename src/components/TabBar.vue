@@ -17,12 +17,12 @@
   .tab-inner-wrapper {
     flex-direction: row;
     align-items: center;
-    margin-top: 10px;
-    border-bottom-color: #d9d9d9;
-    border-bottom-width: 1px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .tab-inner-wrapper-x {
+    border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
     margin-bottom: 88px;
   }
   .tab-item-wrapper {
@@ -39,9 +39,6 @@
   .iconfont {
     font-family: iconfont;
     font-size: 50px;
-  }
-  .tab-icon {
-    /* background-color: orange; */
   }
 </style>
 
