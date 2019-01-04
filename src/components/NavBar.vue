@@ -1,6 +1,6 @@
 <template>
   <div v-if="show" class="wrapper">
-    <div class="inner-wrapper">
+    <div :class="['inner-wrapper', isIpx && isIpx() ? 'inner-wrapper-x' : '']">
       <div class="item">
         <div class="item-inner" @click="onBack"><text class="txt" v-if="back">&#xe68f;</text></div>
       </div>
@@ -16,14 +16,17 @@
 
 <style scoped>
   .wrapper {
-    height: 88px;
     width: 750px;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
   }
   .inner-wrapper {
     height: 88px;
+    margin-top: 40px;
     flex-direction: row;
+  }
+  .inner-wrapper-x {
+    margin-top: 88px;
   }
   .iconfont {
     font-family: iconfont;

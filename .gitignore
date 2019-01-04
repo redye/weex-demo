@@ -6,6 +6,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.xcbkptlist
 
 # weex
 node_modules/

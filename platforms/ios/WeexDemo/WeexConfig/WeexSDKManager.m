@@ -22,7 +22,7 @@
 {
 #if DEBUG
     [WXDevTool setDebug:NO];
-    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.56:8100/debugProxy/native/5"];
+    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.56:8088/debugProxy/native/5"];
 #endif
     
     NSURL *url = nil;

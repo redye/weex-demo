@@ -1,4 +1,5 @@
-import util from '@/util/util';
+const util = require('@/util/util');
+const configure = require('@/util/configure');
 
 const navigator = weex.requireModule('navigator');
 
@@ -12,6 +13,8 @@ module.exports = {
     const url = options && options.url;
     if (url && url.length > 0) {
       const targetUrl = util.getTargetUrl(url);
+      console.log(`targetUrl ===> ${targetUrl}`);
+      configure.hideNavBar(false);
       navigator.push({
         url: targetUrl,
         animated: options.animated ? options.animated : 'true'

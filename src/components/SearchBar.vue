@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="inner-wrapper">
+    <div :class="['inner-wrapper', isIpx && isIpx() ? 'inner-wrapper-x' : '']">
       <div class="item" @click="onItemClick(0)">
         <text class="ic iconfont">&#xe674;</text>
         <text class="txt">扫一扫</text>
@@ -18,15 +18,18 @@
 
 <style scoped>
   .wrapper {
-    height: 88px;
     width: 750px;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
   }
   .inner-wrapper {
     height: 88px;
+    margin-top: 40px;
     flex-direction: row;
     align-items: center;
+  }
+  .inner-wrapper-x {
+    margin-top: 88px;
   }
   .iconfont {
     font-family: iconfont;

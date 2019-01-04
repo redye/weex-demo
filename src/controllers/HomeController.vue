@@ -4,9 +4,10 @@
     <channel @click="onClick" :channels="channels"></channel>
     <text>这是首页</text>
     <text>这是首页</text>
-    <text>这是首页</text>
-    <text>这是首页</text>
     <text>这是首页2</text>
+    <text>这是首页2</text>
+    <text>这是首页3</text>
+    <text>这是首页6</text>
   </div>
 </template>
 
@@ -25,8 +26,15 @@ import Channel from '@/components/Channel';
 
 const modal = weex.requireModule('modal');
 const navigator = require('@/util/navigator');
+const configure = require('@/util/configure');
 
 export default {
+  props: {
+    hideNavBar: {
+      type: Boolean,
+      default: true
+    }
+  },
   components: {
     SearchBar,
     Channel
@@ -51,14 +59,17 @@ export default {
 
     },
     onItemClick: function (event) {
-      console.log(`config ==> ${JSON.stringify(this.$getConfig())}`);
       navigator.push({
-        url: `controllers/WebController.js?url=http://www.baidu.com`
+        url: `test.js`
       });
     }, 
-    onAppear: function () {
+    viewAppear: function () {
       console.log('home appear')
+      configure.hideNavBar(true);
     }
+  },
+  created: function() {
+    console.log('home created');
   }
 }
 </script>

@@ -26,10 +26,9 @@
 
 <script>
 
-import util from "@/util/util";
-
 const webview = weex.requireModule("webview");
-const navigator = require('@/util/navigator');
+// const navigator = require('@/util/navigator');
+// const util = require('@/util/util');
 
 export default {
   components: {},

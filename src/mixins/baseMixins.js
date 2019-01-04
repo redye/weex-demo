@@ -6,7 +6,11 @@ const baseMixins = {
   },
   methods: {
     isIpx: function () {
-      return weex && (weex.config.env.deviceModel === 'iPhone10,3' || weex.config.env.deviceModel === 'iPhone10,6');
+      const platform = weex && weex.config.env.platform;
+      const scale = weex && weex.config.env.scale;
+      const deviceHeight = weex && weex.config.env.deviceHeight;
+      const screenHeight = deviceHeight / (scale > 0 ? scale : 1);
+      return platform === 'iOS' && (screenHeight === 812 || screenHeight === 896);
     }
   }
 };
