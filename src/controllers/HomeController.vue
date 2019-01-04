@@ -60,7 +60,7 @@ export default {
     },
     onItemClick: function (event) {
       navigator.push({
-        url: `test.js`
+        url: `controllers/WebController.js?url=http://www.baidu.com`
       });
     }, 
     viewAppear: function () {

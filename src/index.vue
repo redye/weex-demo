@@ -73,14 +73,11 @@ export default {
     updateSelectedRoute: function() {
       const routes = this.$router.options.routes;
       const currentRoute = routes.filter((item) => {
-        console.log('item.name ==>', item.name);
         const name = item.name;
         return name === this.selectedKey;
       })[0];
-      if ('home' === currentRoute.name) {
-        const component = currentRoute.component;
-        component.methods && component.methods.viewAppear && component.methods.viewAppear();
-      }
+      const component = currentRoute.component;
+      component.methods && component.methods.viewAppear && component.methods.viewAppear();
     }
   },
   beforeCreate: function() {

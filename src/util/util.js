@@ -28,7 +28,7 @@ const util = {
       if (typeof window === 'object') {
         nativeBase = 'http://' + host + '/index.html?page=./dist/';
       } else {
-        nativeBase = 'http://' + host + '/dist/';
+        nativeBase = 'http://' + host + '/';
       }
     }
 
