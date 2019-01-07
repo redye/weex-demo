@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" @viewappear="onViewAppear">    
-    <nav-bar ref="navBar" :back="false" right-text="消息"></nav-bar>
+    <!-- <nav-bar ref="navBar" :back="false" right-text="消息"></nav-bar> -->
     <router-view style="flex: 1;"/>
     <tab-bar :tabs="tabs" @click="onClick"></tab-bar>
   </div>
@@ -84,12 +84,12 @@ export default {
     util.initIconFont();
   },
   mounted: function() {
-    const navBar = this.$refs.navBar;
-    weex.app = Object.assign(weex.app || {}, {
-      ui: {
-        navBar: navBar
-      }
-    });
+    // const navBar = this.$refs.navBar;
+    // weex.app = Object.assign(weex.app || {}, {
+    //   ui: {
+    //     navBar: navBar
+    //   }
+    // });
   }
 }
 </script>

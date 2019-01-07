@@ -1,20 +1,41 @@
 // Helper functions
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
+const sourcer = require('sourcer');
 
 const root = (args) => {
   return path.join(ROOT, 'src', args);
 }
+
+const entrys = () => {
+  const root = process.cwd();
+  const source = sourcer.find(root, 'src/controllers', {
+    recursive: true
+  });
+  const base = sourcer.base('src/controllers');
+  const entrys = {};
+  source.forEach(s => {
+    let file = path.relative(path.resolve(base), s);
+    file = file.replace(/\.\w+$/, '');
+    entrys[file] = s + '?entry=true';
+  });
+  const entry = path.join(ROOT, 'src');
+  entrys.index = entry + '?entry=true';
+  console.log(`entrys ==> ${JSON.stringify(entrys)}`);
+  return entrys;
+}
+
 const rootNode = (args) => {
   return path.join(ROOT, args);
 }
 
 const resolve = (dir) => {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
   root,
+  entrys,
   rootNode,
   resolve
 }

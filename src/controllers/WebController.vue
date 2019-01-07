@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <text>Web</text>
+    <nav-bar :back="true" title="Web"></nav-bar>
     <web 
       class="web" 
       ref="webview"
@@ -17,7 +17,6 @@
 .wrapper {
   flex: 1;
   width: 750px;
-  background-color: red;
 }
 .web {
   flex: 1;
@@ -26,12 +25,16 @@
 
 <script>
 
+import NavBar from '@/components/NavBar';
+
 const webview = weex.requireModule("webview");
-// const navigator = require('@/util/navigator');
-// const util = require('@/util/util');
+const navigator = require('@/util/navigator');
+const util = require('@/util/util');
 
 export default {
-  components: {},
+  components: {
+    NavBar
+  },
   props: {
     url: {
       type: String,

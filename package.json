@@ -23,7 +23,7 @@
     "pack:android": "npm run clean:android && weex build android",
     "pack:web": "npm run clean:web && npm run build:prod:web",
     "compile:clean": "rimraf ./dist",
-    "compile": "npm run compile:clean && weex compile src dist -d source-map"
+    "compile": "npm run compile:clean && weex compile src dist -d source-map -w"
   },
   "keywords": [
     "weex"
@@ -67,6 +67,7 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
     "script-ext-html-webpack-plugin": "^1.8.5",
+    "sourcer": "^0.1.4",
     "vue-loader": "^12.2.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.21",

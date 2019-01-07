@@ -4,12 +4,12 @@ import baseMixins from '@/mixins/baseMixins';
 /* weex initialized here, please do not move this line */
 const router = require('@/router.js');
 const App = require('@/index.vue');
-const configure = require('@/util/configure');
+// const configure = require('@/util/configure');
 
 Vue.mixin(baseMixins);
 
 router.beforeEach((to, from, next) => {
-  configure.hideNavBar(false);
+  // configure.hideNavBar(false);
   next();
 });
 

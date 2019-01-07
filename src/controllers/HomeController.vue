@@ -3,11 +3,10 @@
     <search-bar @item-click="onItemClick" @search="onSearch"></search-bar>
     <channel @click="onClick" :channels="channels"></channel>
     <text>这是首页</text>
-    <text>这是首页</text>
-    <text>这是首页2</text>
-    <text>这是首页2</text>
     <text>这是首页3</text>
-    <text>这是首页6</text>
+    <text>这是首页2</text>
+    <text>这是首页4</text>
+    <text>这是首页12</text>
   </div>
 </template>
 
@@ -65,11 +64,11 @@ export default {
     }, 
     viewAppear: function () {
       console.log('home appear')
-      configure.hideNavBar(true);
+      // configure.hideNavBar(true);
     }
   },
   created: function() {
-    console.log('home created');
+    console.log('home created ===>');
   }
 }
 </script>

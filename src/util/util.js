@@ -38,17 +38,15 @@ const util = {
     const newUrl = util.getBaseUrl() + jsFile;
     return newUrl;
   },
-  getUrlQuery: function (url, name) {
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-    var r = url.slice(url.indexOf('?') + 1).match(reg);
-    if (r != null) {
-      try {
-        return decodeURIComponent(r[2]);
-      } catch (_e) {
-        return null;
-      }
+  getUrlQuery: function (url) {
+    let result = {};
+    const paramstring = url.slice(url.indexOf('?') + 1);
+    const params = paramstring.split('&');
+    for (let i = 0; i < params.length; i++) {
+      let temp = params[i].split('=');
+      result[temp[0]] = decodeURIComponent(temp[1]);
     }
-    return null;
+    return result;
   }
 }
 

@@ -22,7 +22,7 @@
 {
 #if DEBUG
     [WXDevTool setDebug:NO];
-    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.56:8088/debugProxy/native/5"];
+    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.19.40.56:8089/debugProxy/native/5"];
 #endif
     
     NSURL *url = nil;
@@ -33,6 +33,7 @@
     url = [NSURL URLWithString:BUNDLE_URL];
 #endif
     NSString * entryURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"WXEntryBundleURL"];
+    entryURL = @"http://172.19.40.56:8081/index.js";
     if (entryURL) {
         if ([entryURL hasPrefix:@"http"]) {
             url = [NSURL URLWithString:entryURL];

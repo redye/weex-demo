@@ -205,6 +205,7 @@
 #pragma mark - websocket
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
+    NSLog(@"web socket did open.");
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
@@ -229,7 +230,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"web socket did fail.");
 }
 
 #pragma mark - localBundle

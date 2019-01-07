@@ -13,10 +13,15 @@ module.exports = {
     const url = options && options.url;
     if (url && url.length > 0) {
       const targetUrl = util.getTargetUrl(url);
+      let query = util.getUrlQuery(url);
+      if (options.params) {
+        query = Object.assign(query || {}, options.params);
+      }
       console.log(`targetUrl ===> ${targetUrl}`);
       configure.hideNavBar(false);
       navigator.push({
         url: targetUrl,
+        params: query,
         animated: options.animated ? options.animated : 'true'
       }, callback);
     }

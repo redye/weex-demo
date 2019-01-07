@@ -11,6 +11,7 @@ const isWin = /^win/.test(process.platform);
 const weexEntry = {
   'index': helper.root('entry.js')
 }
+// const weexEntry = helper.entrys();
 
 const getEntryFileContent = (source, routerpath) => {
   let dependence = `import Vue from 'vue'\n`;
