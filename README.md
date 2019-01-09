@@ -108,7 +108,7 @@ weex debug
 
 看来还是自己集成 `WXDevtool` 比较靠谱哇！
 
-weex 光放文档 - [集成 Devtools 到 iOS](https://weex.apache.org/cn/guide/integrate-devtool-to-ios.html)
+weex 官方文档 - [集成 Devtools 到 iOS](https://weex.apache.org/cn/guide/integrate-devtool-to-ios.html)
 
 使用 pod 集成
 
@@ -135,33 +135,32 @@ pod  'WXDevtool'
 
 ```js
 getBaseUrl: function () {
-    const bundleUrl = weex.config.bundleUrl;
-    let baseUrl;
-    const isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
-
-    const isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
-    if (isAndroidAssets) {
-      baseUrl = 'file://assets/dist/';
-    } else if (isiOSAssets) {
-      baseUrl = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
-    } else {
-      let host = 'localhost:12580';
-      const matches = /\/\/([^/]+?)\//.exec(bundleUrl);
-      if (matches && matches.length >= 2) {
-        host = matches[1];
-      }
-
-      // 此处需注意一下,tabbar 用的直接是jsbundle 的路径,但是navigator是直接跳转到新页面上的.
-      // in Browser or WebView
-      if (typeof window === 'object') {
-        baseUrl = 'http://' + host + '/index.html?page=./dist/';
-      } else {
-        baseUrl = 'http://' + host + '/';
-      }
+  const bundleUrl = weex.config.bundleUrl;
+  let baseUrl;
+  const isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+	
+  const isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+  if (isAndroidAssets) {
+	  baseUrl = 'file://assets/dist/';
+  } else if (isiOSAssets) {
+	  baseUrl = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+  } else {
+    let host = 'localhost:12580';
+    const matches = /\/\/([^/]+?)\//.exec(bundleUrl);
+    if (matches && matches.length >= 2) {
+      host = matches[1];
     }
-
-    return baseUrl;
+	
+    // in Browser or WebView
+    if (typeof window === 'object') {
+      baseUrl = 'http://' + host + '/index.html?page=./dist/';
+    } else {
+      baseUrl = 'http://' + host + '/';
+    }
   }
+	
+  return baseUrl;
+}
 ```
 获取 baseUrl 后拼接上目标页面的 url 就可以了
 
@@ -181,7 +180,7 @@ getTargetUrl: function (url) {
 
 ```js
 navigator.push({
-    url: `controllers/WebController.js?url=http://www.baidu.com`
+  url: `controllers/WebController.js?url=http://www.baidu.com`
 });
 ```
 
@@ -192,23 +191,23 @@ navigator.push({
  * @param {Function} callback 回调函数
  */
 push: function (options, callback) {
-	const url = options && options.url;
-	if (url && url.length > 0) {
-	  let targetUrl = util.getTargetUrl(url);
-	  let query = util.parseUrlQuery(url);
-	  if (options.params) {
-	    query = Object.assign(query || {}, options.params);
-	  }
-	  console.log(`query ==> ${JSON.stringify(query)}`);
-	  targetUrl = targetUrl + '?' + util.formatQueryString(query);
-	  console.log(`targetUrl ===> ${targetUrl}`);
-	  configure.hideNavBar(false);
-	  navigator.push({
-	    url: targetUrl,
-	    params: query,
-	    animated: options.animated ? options.animated : 'true'
-	  }, callback);
-	}
+  const url = options && options.url;
+  if (url && url.length > 0) {
+    let targetUrl = util.getTargetUrl(url);
+    let query = util.parseUrlQuery(url);
+    if (options.params) {
+      query = Object.assign(query || {}, options.params);
+    }
+    console.log(`query ==> ${JSON.stringify(query)}`);
+    targetUrl = targetUrl + '?' + util.formatQueryString(query);
+    console.log(`targetUrl ===> ${targetUrl}`);
+    configure.hideNavBar(false);
+    navigator.push({
+      url: targetUrl,
+      params: query,
+      animated: options.animated ? options.animated : 'true'
+    }, callback);
+  }
 }
 ```
 
@@ -221,6 +220,18 @@ created: function (event) {
 	if (params && params.url) {
 	  this.url = params.url;
 	}
+}
+...
+// util.js
+parseUrlQuery: function (url) {
+	let result = {};
+	const paramstring = url.slice(url.indexOf('?') + 1);
+	const params = paramstring.split('&');
+	for (let i = 0; i < params.length; i++) {
+	  let temp = params[i].split('=');
+	  result[temp[0]] = decodeURIComponent(temp[1]);
+	}
+	return result;
 }
 ```
 
@@ -305,7 +316,7 @@ const entrys = () => {
 }
 ```
 
-同事
+同时
 
 ```js
 const weexEntry = helper.entrys();
@@ -429,4 +440,4 @@ weex run 的命令在 `/Users/weimob/.xtoolkit/node_modules/weexpack/lib/run`
 
 * [Weex 是如何在 iOS 客户端上跑起来的](https://halfrost.com/weex_ios/)
 * [Weex & ReactNative & JSPatch](http://awhisper.github.io/2016/07/22/Weex-ReactNative-JSPatch/)
-* [weex&ReactNative对比](https://zhuanlan.zhihu.com/p/21677103)
+* [weex & ReactNative 对比](https://zhuanlan.zhihu.com/p/21677103)
