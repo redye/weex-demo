@@ -311,7 +311,7 @@ const entrys = () => {
 const weexEntry = helper.entrys();
 ```
 
-这样就可以使用 `bpn run dev` 或者 `npm run build` 打包啦~
+这样就可以使用 `npm run dev` 或者 `npm run build` 打包啦~
 
 但是注意这里我们使用脚手架生成的目录结构，默认的入口文件对应为 http://ip:port/index.js，对应 js 文件是 entry.js，同时 entry.js 也参与打包，所以修改我们的目录文件
 
