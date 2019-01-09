@@ -34,11 +34,16 @@ const util = {
 
     return nativeBase;
   },
-  getTargetUrl: function (jsFile) {
-    const newUrl = util.getBaseUrl() + jsFile;
+  getTargetUrl: function (url) {
+    const baseUrl = util.getBaseUrl();
+    let path = url;
+    if (url.indexOf('?') > -1) {
+      path = url.split('?')[0];
+    }
+    const newUrl = baseUrl + path;
     return newUrl;
   },
-  getUrlQuery: function (url) {
+  parseUrlQuery: function (url) {
     let result = {};
     const paramstring = url.slice(url.indexOf('?') + 1);
     const params = paramstring.split('&');
@@ -47,6 +52,13 @@ const util = {
       result[temp[0]] = decodeURIComponent(temp[1]);
     }
     return result;
+  },
+  formatQueryString: function (query) {
+    let queryPattern = [];
+    for (let key in query) {
+      queryPattern.push(`${key}=${query[key]}`);
+    }
+    return queryPattern.join('&');
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar :back="false"></nav-bar>
+    <nav-bar :back="false" title="分类"></nav-bar>
     <text>分类</text>
   </div>
 </template>

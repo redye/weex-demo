@@ -8,10 +8,10 @@ const vueLoaderConfig = require('./vue-loader.conf');
 const vueWebTemp = helper.rootNode(config.templateDir);
 const hasPluginInstalled = fs.existsSync(helper.rootNode(config.pluginFilePath));
 const isWin = /^win/.test(process.platform);
-const weexEntry = {
-  'index': helper.root('entry.js')
-}
-// const weexEntry = helper.entrys();
+// const weexEntry = {
+//   'index': helper.root('entry.js')
+// }
+const weexEntry = helper.entrys();
 
 const getEntryFileContent = (source, routerpath) => {
   let dependence = `import Vue from 'vue'\n`;
@@ -206,7 +206,10 @@ const weexConfig = {
       {
         test: /\.js$/,
         use: [{
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0']
+          }
         }],
         exclude: config.excludeModuleReg
       },

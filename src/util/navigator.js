@@ -12,11 +12,13 @@ module.exports = {
   push: function (options, callback) {
     const url = options && options.url;
     if (url && url.length > 0) {
-      const targetUrl = util.getTargetUrl(url);
-      let query = util.getUrlQuery(url);
+      let targetUrl = util.getTargetUrl(url);
+      let query = util.parseUrlQuery(url);
       if (options.params) {
         query = Object.assign(query || {}, options.params);
       }
+      console.log(`query ==> ${JSON.stringify(query)}`);
+      targetUrl = targetUrl + '?' + util.formatQueryString(query);
       console.log(`targetUrl ===> ${targetUrl}`);
       configure.hideNavBar(false);
       navigator.push({

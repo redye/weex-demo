@@ -4,7 +4,7 @@ import HomeController from '@/controllers/HomeController';
 import TopicController from '@/controllers/TopicController';
 import CategoryController from '@/controllers/CategoryController';
 import CartController from '@/controllers/CartController';
-import MineController from '@/controllers/MineController';
+import MineController from '@/controllers/MineController'
 
 Vue.use(Router)
 

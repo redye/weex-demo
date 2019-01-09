@@ -9,10 +9,10 @@ const root = (args) => {
 
 const entrys = () => {
   const root = process.cwd();
-  const source = sourcer.find(root, 'src/controllers', {
+  const source = sourcer.find(root, 'src', {
     recursive: true
   });
-  const base = sourcer.base('src/controllers');
+  const base = sourcer.base('src');
   const entrys = {};
   source.forEach(s => {
     let file = path.relative(path.resolve(base), s);

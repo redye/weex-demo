@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar :back="false"></nav-bar>
+    <nav-bar :back="false" title="购物车"></nav-bar>
     <text>购物车</text>
   </div>
 </template>

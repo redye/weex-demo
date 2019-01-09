@@ -2,10 +2,10 @@
   <div v-if="show" class="wrapper">
     <div :class="['inner-wrapper', isIpx && isIpx() ? 'inner-wrapper-x' : '']">
       <div class="item">
-        <div class="item-inner" @click="onBack"><text class="txt" v-if="back">&#xe68f;</text></div>
+        <div class="item-inner" @click="onBack"><text class="txt" v-if="back">&#xee22;</text></div>
       </div>
       <div class="title-wrapper" @click="onSearch">
-        <text class="search-txt iconfont">标题</text>
+        <text class="search-txt iconfont">{{title}}</text>
       </div>
       <div class="item">
         <div class="item-inner" @click="onRight"><text class="txt" v-if="rightText">{{rightText}}</text></div>
@@ -72,6 +72,10 @@ export default {
     visible: {
       type: Boolean,
       default: true
+    },
+    title: {
+      type: String,
+      default: '标题'
     }
   },
   data: function () {
@@ -88,6 +92,13 @@ export default {
     },
     setVisible: function(visible) {
       this.show = visible;
+    },
+    isIpx: function() {
+      const platform = weex && weex.config.env.platform;
+      const scale = weex && weex.config.env.scale;
+      const deviceHeight = weex && weex.config.env.deviceHeight;
+      const screenHeight = deviceHeight / (scale > 0 ? scale : 1);
+      return platform === 'iOS' && (screenHeight === 812 || screenHeight === 896);
     }
   }
 }

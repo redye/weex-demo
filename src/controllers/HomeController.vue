@@ -6,7 +6,7 @@
     <text>这是首页3</text>
     <text>这是首页2</text>
     <text>这是首页4</text>
-    <text>这是首页12</text>
+    <text>这是首页14</text>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <nav-bar :back="true" title="Web"></nav-bar>
+    <nav-bar :back="true" :title="title"></nav-bar>
     <web 
       class="web" 
       ref="webview"
@@ -42,20 +42,27 @@ export default {
     }
   },
   data: function () {
-    return {};
+    return { 
+      title: 'Web'
+    };
   },
   methods: {
     onPageStart: function(event) {
-
+      console.log('onPageStart ===>', JSON.stringify(event));
     },
     onPageFinish: function(event) {
-
+      console.log('onPageFinish ===>', JSON.stringify(event));
+      this.title = event && event.title;
+      const canGoForward = event && event.canGoForward;
+      if (canGoForward) {
+        
+      }
     },
     onReceivedTitle: function(event) {
-
+      console.log('onReceivedTitle ===>', JSON.stringify(event));
     },
     onError: function(event) {
-
+      console.log('onError ===>', JSON.stringify(event));
     },
     goBack: function() {
       const webElement = this.$el('webview');
@@ -70,8 +77,13 @@ export default {
 
     }
   },
-  created: function () {
-
+  created: function (event) {
+    util.initIconFont();
+    const bundleUrl = this.$getConfig().bundleUrl;
+    const params = util.parseUrlQuery(bundleUrl);
+    if (params && params.url) {
+      this.url = params.url;
+    }
   }
 };
 </script>
