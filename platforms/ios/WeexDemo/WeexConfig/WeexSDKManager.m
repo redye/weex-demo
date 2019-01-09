@@ -33,7 +33,7 @@
     url = [NSURL URLWithString:BUNDLE_URL];
 #endif
     NSString * entryURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"WXEntryBundleURL"];
-    entryURL = @"http://172.19.40.56:8081/entry.js";
+    entryURL = @"http://172.19.40.56:8081/index.js";
     if (entryURL) {
         if ([entryURL hasPrefix:@"http"]) {
             url = [NSURL URLWithString:entryURL];

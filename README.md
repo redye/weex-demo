@@ -96,3 +96,337 @@ ls -a
 ```
 找到 .vue 文件夹，删除他就可以了。
 
+## 集成 WXDevtool
+
+当然，如果为了简便，你可以直接使用 weex 提供的 playground 来体验或调试你的代码（在 app store 下载阿里爸爸 WeexPlayground），起初为了偷懒，我也是这么干的，新版的 dev tool 还是很给给力的，直接使用下面的命令就可以启动调试界面了，扫码开始调试吧，冲鸭~
+
+```bash
+weex debug 
+```
+
+虽然你满怀信心开始了你的调试之路，但是很不幸的是这条路总是容易断掉😭
+
+看来还是自己集成 `WXDevtool` 比较靠谱哇！
+
+weex 光放文档 - [集成 Devtools 到 iOS](https://weex.apache.org/cn/guide/integrate-devtool-to-ios.html)
+
+使用 pod 集成
+
+```ruby
+source https://github.com/CocoaPods/Specs.git，
+pod  'WXDevtool'
+```
+
+这里有个小插曲，也算是自己做的一点小贡献 😊
+
+我直接集成的 `WXDevtool` 最新版本，按照文档集成，编译成功运行时总是内存崩溃，刚开始一直以为是自己哪里集成错误，反反复复试了很多遍，确定不是自己操作失误的话，那肯定就是代码哪里有问题了
+
+崩溃的点在 `WXDebugDomainController` 类的 .m 文件的 `line 88`，具体可以看我的题的 [issue](https://github.com/weexteam/weex-devtool-iOS/issues/31)，现在最新版已经修复了这个问题了。
+
+集成 `WXDevtool` 后，开启调试，模拟器会自动连接上，更方便，更快速 ✌️
+
+但是最近在开启调试后页面直接白屏了，断点调试已经拿到页面数据了，还待进一步的研究...
+
+## 使用 navigator 跳转页面
+
+`navigator` 是 weex 提供的一个页面跳转模块，跟 vue 里面的 `router-view` 不同的是，他会在一个新的 `ViewController` 里面渲染页面，即 WeexSDK 里面封装的 `WXBaseViewController`。
+
+但是在使用 `navigator` 入栈的时候，push 的 url 需要针对不同的平台需要有不同的处理，幸好，我们可以根据 `bundleUrl` 获取不同平台的 `baseUrl`:
+
+```js
+getBaseUrl: function () {
+    const bundleUrl = weex.config.bundleUrl;
+    let baseUrl;
+    const isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+    const isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+    if (isAndroidAssets) {
+      baseUrl = 'file://assets/dist/';
+    } else if (isiOSAssets) {
+      baseUrl = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+    } else {
+      let host = 'localhost:12580';
+      const matches = /\/\/([^/]+?)\//.exec(bundleUrl);
+      if (matches && matches.length >= 2) {
+        host = matches[1];
+      }
+
+      // 此处需注意一下,tabbar 用的直接是jsbundle 的路径,但是navigator是直接跳转到新页面上的.
+      // in Browser or WebView
+      if (typeof window === 'object') {
+        baseUrl = 'http://' + host + '/index.html?page=./dist/';
+      } else {
+        baseUrl = 'http://' + host + '/';
+      }
+    }
+
+    return baseUrl;
+  }
+```
+获取 baseUrl 后拼接上目标页面的 url 就可以了
+
+```js
+getTargetUrl: function (url) {
+    const baseUrl = util.getBaseUrl();
+    let path = url;
+    if (url.indexOf('?') > -1) {
+      path = url.split('?')[0];
+    }
+    const newUrl = baseUrl + path;
+    return newUrl;
+  },
+```
+
+🌰🌰🌰
+
+```js
+navigator.push({
+    url: `controllers/WebController.js?url=http://www.baidu.com`
+});
+```
+
+```js
+/**
+ * 入栈
+ * @param {Object} options 路由信息
+ * @param {Function} callback 回调函数
+ */
+push: function (options, callback) {
+	const url = options && options.url;
+	if (url && url.length > 0) {
+	  let targetUrl = util.getTargetUrl(url);
+	  let query = util.parseUrlQuery(url);
+	  if (options.params) {
+	    query = Object.assign(query || {}, options.params);
+	  }
+	  console.log(`query ==> ${JSON.stringify(query)}`);
+	  targetUrl = targetUrl + '?' + util.formatQueryString(query);
+	  console.log(`targetUrl ===> ${targetUrl}`);
+	  configure.hideNavBar(false);
+	  navigator.push({
+	    url: targetUrl,
+	    params: query,
+	    animated: options.animated ? options.animated : 'true'
+	  }, callback);
+	}
+}
+```
+
+最后说一下 `navigator` 不同页面传参的问题，最简单的方法就是将参数拼接到 url 的后面，然后在新的页面通过 `this.$getConfig().bundleUrl` 获取 url，解析参数:
+
+```js
+created: function (event) {
+	const bundleUrl = this.$getConfig().bundleUrl;
+	const params = util.parseUrlQuery(bundleUrl);
+	if (params && params.url) {
+	  this.url = params.url;
+	}
+}
+```
+
+## 打包 js 文件
+在使用 `navigator` 的时候，你会发现，如果要跳转到新页面，那么新页面也是需要打包成 js 文件的。
+
+`npm run dev` 或者 `npm run build` 都可以对 .vue 文件打包，但是他们只打包了入口文件，在 webpack.common.conf.js 文件中，可以看到
+
+```js
+const weexEntry = {
+  'index': helper.root('entry.js')
+}
+```
+这时，我们想要的 controllers 文件夹下面的 WebController.vue 并没有打包，navigator push 的 url 其实是一个 bundleUrl，需要独立打包成 js 文件才可以。
+
+weex tool 提供了一个 命令来进行打包 
+
+```bash
+weex compile src dist -d
+# weex compile	<源文件> <目标文件> [options] 
+```
+
+但是在使用这个命令的时候，只要我有导入其他组件，打包都会出错
+
+```js
+Module not found: Error: Can't resolve '@/components/Channel'
+```
+
+对于我这微薄的 webpack 认知，真的是 🤷‍♀️🤷‍♀️🤷‍♀️
+
+weeex 定义的命令路径为 `/usr/local/lib/node_modules/weex-toolkit/node_modules/weex-builder/src` 下，他定义的 entry file 是将所有的 .vue 都打包成入口文件
+
+```js
+const entrys = {};
+this.source.forEach(s => {
+	let file = path.relative(path.resolve(this.base), s);
+	file = file.replace(/\.\w+$/, '');
+	if (!this.options.web) {
+	  s += '?entry=true';
+	}
+	entrys[file] = s;
+});
+```
+
+输出结果
+
+```json
+{
+    "components/Channel":"/Users/xxx/Documents/weex/Demo/src/components/Channel.vue?entry=true",
+    "components/NavBar":"/Users/xxx/Documents/weex/Demo/src/components/NavBar.vue?entry=true",
+    "components/SearchBar":"/Users/xxx/Documents/weex/Demo/src/components/SearchBar.vue?entry=true",
+    "components/TabBar":"/Users/xxx/Documents/weex/Demo/src/components/TabBar.vue?entry=true",
+    "controllers/CartController":"/Users/xxx/Documents/weex/Demo/src/controllers/CartController.vue?entry=true",
+    "controllers/CategoryController":"/Users/xxx/Documents/weex/Demo/src/controllers/CategoryController.vue?entry=true",
+    "controllers/HomeController":"/Users/xxx/Documents/weex/Demo/src/controllers/HomeController.vue?entry=true",
+    "controllers/MineController":"/Users/xxx/Documents/weex/Demo/src/controllers/MineController.vue?entry=true",
+    "controllers/TopicController":"/Users/xxx/Documents/weex/Demo/src/controllers/TopicController.vue?entry=true",
+    "controllers/WebController":"/Users/xxx/Documents/weex/Demo/src/controllers/WebController.vue?entry=true",
+    "index":"/Users/xxx/Documents/weex/Demo/src/index.vue?entry=true"
+}
+```
+
+既然知道是这样，那么我们就可以改写 `webpack.common.conf.js` 文件，具体的实现在 `helper.js` 中新增方法
+
+```js
+const entrys = () => {
+  const root = process.cwd();
+  const reg = new RegExp('\\.(' + 'vue|we' + ')$');
+  const source = sourcer.find(root, 'src', {
+    recursive: true
+  }).filter(s => reg.test(path.extname(s)));
+  const base = sourcer.base('src');
+  const entrys = {};
+  source.forEach(s => {
+    let file = path.relative(path.resolve(base), s);
+    file = file.replace(/\.\w+$/, '');
+    entrys[file] = s + '?entry=true';
+  });
+  const entry = path.join(ROOT, 'src');
+  entrys.index = entry + '?entry=true';
+  return entrys;
+}
+```
+
+同事
+
+```js
+const weexEntry = helper.entrys();
+```
+
+这样就可以使用 `bpn run dev` 或者 `npm run build` 打包啦~
+
+但是注意这里我们使用脚手架生成的目录结构，默认的入口文件对应为 http://ip:port/index.js，对应 js 文件是 entry.js，同时 entry.js 也参与打包，所以修改我们的目录文件
+
+```
+|------ src
+|------ |------ index.js  # 将 entry.js 修改成 index.js
+|------ |------ app.vue   # 将 index.vue 修改成 app.vue
+|------ |------ router.js
+|------ |------ controllers
+|------ |------ |------ WebController.vue
+|------ |------ components 
+|------ |------ |------ NavBar.vue
+|------ |------ |------ Channel.vue
+....
+```
+
+因为每个 controller 之间是独立存在的，所以我在 index.js 里面定义个 mixin 在每个不同 ViewController 里面并不能共享使用 
+
+```js
+import baseMixins from '@/mixins/baseMixins';
+Vue.mixin(baseMixins);
+```
+
+顺便提一下，`import` 和 `require` 的用法
+
+`import` 是 es6 的写法，对应 `export default baseMixins;`
+
+`require` 是 es6 之前的写法，对应 `module.exports = baseMixins;`
+
+写 mixin 的时候坑了好久 😂
+
+## 源于启动 WebScoket 服务
+
+```
+weex run ios
+```
+
+这个命令可以帮你启动 ws 服务，选择模拟器并编译运行 iOS 代码，这个命令下面最的工作还蛮多的，但是如果你只想启动 ws 服务怎么办呢，你可以修改这个命令，或者新增一个命令（机智如你，一定会选择新增命令的😎）
+
+weex run 的命令在 `/Users/weimob/.xtoolkit/node_modules/weexpack/lib/run`
+
+* 复制 ios.js 文件，修改为 hot.js
+* 修改 hot.js
+
+	```js
+	var runHot = function runHot(options) {
+	  logger.info('npm run build');
+	  utils.checkAndInstallForIosDeploy().then(utils.buildJS).then(function () {
+	    return copyJsbundleAssets(process.cwd(), 'dist', 'platforms/ios/bundlejs/');
+	  }).then(function () {
+	    return passOptions(options);
+	  }).then(prepareIOS).then(startHotReloadServer).then(registeFileWatcher).then(resolveConfig).catch(function (err) {
+	    if (err) {
+	      logger.error('Error:' + (err.stack || err));
+	      exit(0);
+	    }
+	  });
+	};
+	
+	module.exports = runHot;
+	```
+* 修改同级目录下的 index.js
+	
+	```js
+	'use strict';
+	
+	var runAndroid = require('./android');
+	var runIOS = require('./ios');
+	var runWeb = require('./web');
+	var runHot = require('./hot'); // 新增
+	
+	module.exports = {
+	  runAndroid: runAndroid,
+	  runIOS: runIOS,
+	  runWeb: runWeb,
+	  runHot: runHot // 新增
+	};
+	```
+* 修改 ../lib 目录下的 weexpack-run.js，添加命令
+
+	```js
+	...
+	const {
+	  runAndroid,
+	  runIOS,
+	  runWeb,
+	  runHot
+	} = require('../lib/run');
+	
+	...
+	
+	function isValidPlatform(args) {
+	  if (args && args.length) {
+	    return args[0] === 'android' || args[0] === 'ios' || args[0] === 'web' || args[0] === 'hot'
+	  }
+	  return false
+	}
+	
+	...
+	
+	function run(platform, options) {
+	  switch (platform) {
+	    case 'android' : runAndroid(options); break;
+	    case 'ios' : runIOS(options); break;
+	    case 'web' : runWeb(options); break;
+	    case 'hot' : runHot(options); break;
+	  }
+	}
+	
+	```
+	
+好了，现在你就可以使用 `weex run hot` 命令来开启你的 ws 服务了。
+
+## 推荐阅读
+
+* [Weex 是如何在 iOS 客户端上跑起来的](https://halfrost.com/weex_ios/)
+* [Weex & ReactNative & JSPatch](http://awhisper.github.io/2016/07/22/Weex-ReactNative-JSPatch/)
+* [weex&ReactNative对比](https://zhuanlan.zhihu.com/p/21677103)

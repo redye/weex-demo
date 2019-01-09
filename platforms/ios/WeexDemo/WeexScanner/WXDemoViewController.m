@@ -218,7 +218,11 @@
         NSString *method = messageDic[@"method"];
         if ([method hasPrefix:@"WXReload"]) {
             if ([method isEqualToString:@"WXReloadBundle"] && messageDic[@"params"]) {
-                self.url = [NSURL URLWithString:messageDic[@"params"]];
+                NSString *params = messageDic[@"params"];
+//                if ([params containsString:@"index.js"]) {
+//                    params = [params stringByReplacingOccurrencesOfString:@"index.js" withString:@"entry.js"];
+//                }
+                self.url = [NSURL URLWithString:params];
             }
             [self render];
         }

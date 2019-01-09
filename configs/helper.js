@@ -9,9 +9,10 @@ const root = (args) => {
 
 const entrys = () => {
   const root = process.cwd();
+  const reg = new RegExp('\\.(' + 'vue|we' + ')$');
   const source = sourcer.find(root, 'src', {
     recursive: true
-  });
+  }).filter(s => reg.test(path.extname(s)));
   const base = sourcer.base('src');
   const entrys = {};
   source.forEach(s => {
@@ -19,7 +20,7 @@ const entrys = () => {
     file = file.replace(/\.\w+$/, '');
     entrys[file] = s + '?entry=true';
   });
-  const entry = path.join(ROOT, 'src');
+  const entry = path.join(ROOT, 'src', 'index.js');
   entrys.index = entry + '?entry=true';
   console.log(`entrys ==> ${JSON.stringify(entrys)}`);
   return entrys;

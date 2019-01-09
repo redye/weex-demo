@@ -8,17 +8,17 @@ const util = {
   },
   getBaseUrl: function () {
     const bundleUrl = weex.config.bundleUrl;
-    var nativeBase;
-    var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+    let baseUrl;
+    const isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
 
-    var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+    const isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
     if (isAndroidAssets) {
-      nativeBase = 'file://assets/dist/';
+      baseUrl = 'file://assets/dist/';
     } else if (isiOSAssets) {
-      nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+      baseUrl = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
     } else {
-      var host = 'localhost:12580';
-      var matches = /\/\/([^/]+?)\//.exec(bundleUrl);
+      let host = 'localhost:12580';
+      const matches = /\/\/([^/]+?)\//.exec(bundleUrl);
       if (matches && matches.length >= 2) {
         host = matches[1];
       }
@@ -26,13 +26,13 @@ const util = {
       // 此处需注意一下,tabbar 用的直接是jsbundle 的路径,但是navigator是直接跳转到新页面上的.
       // in Browser or WebView
       if (typeof window === 'object') {
-        nativeBase = 'http://' + host + '/index.html?page=./dist/';
+        baseUrl = 'http://' + host + '/index.html?page=./dist/';
       } else {
-        nativeBase = 'http://' + host + '/';
+        baseUrl = 'http://' + host + '/';
       }
     }
 
-    return nativeBase;
+    return baseUrl;
   },
   getTargetUrl: function (url) {
     const baseUrl = util.getBaseUrl();

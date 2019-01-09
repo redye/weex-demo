@@ -3,7 +3,7 @@ import baseMixins from '@/mixins/baseMixins';
 
 /* weex initialized here, please do not move this line */
 const router = require('@/router.js');
-const App = require('@/index.vue');
+const App = require('@/app.vue');
 // const configure = require('@/util/configure');
 
 Vue.mixin(baseMixins);

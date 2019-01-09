@@ -206,10 +206,7 @@ const weexConfig = {
       {
         test: /\.js$/,
         use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'stage-0']
-          }
+          loader: 'babel-loader'
         }],
         exclude: config.excludeModuleReg
       },
